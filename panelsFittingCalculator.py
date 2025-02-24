@@ -1,3 +1,5 @@
+import sys
+
 def getNumberOfPanelsThatFitOnRoof(xRoof, yRoof, xPanel, yPanel):
     return max(
         _getNumberOfPanelsThatFitOnRoof(xRoof, yRoof, xPanel, yPanel),
@@ -37,8 +39,13 @@ def _getPanelsThatFitWithoutRotating(xRoof, yRoof, xPanel, yPanel):
     panelsPerColumn = yRoof // yPanel
     return panelsPerRow * panelsPerColumn
 
-print(getNumberOfPanelsThatFitOnRoof(2, 4, 1, 2))
-print(getNumberOfPanelsThatFitOnRoof(3, 5, 1, 2))
-print(getNumberOfPanelsThatFitOnRoof(2, 2, 1, 10))
-print(getNumberOfPanelsThatFitOnRoof(5, 11, 1, 3))
-print(getNumberOfPanelsThatFitOnRoof(1600, 1230, 137, 95))
+# print(getNumberOfPanelsThatFitOnRoof(2, 4, 1, 2))
+# print(getNumberOfPanelsThatFitOnRoof(3, 5, 1, 2))
+# print(getNumberOfPanelsThatFitOnRoof(2, 2, 1, 10))
+# print(getNumberOfPanelsThatFitOnRoof(5, 11, 1, 3))
+# print(getNumberOfPanelsThatFitOnRoof(1600, 1230, 137, 95))
+args = sys.argv
+if (len(args) == 5):
+    xRoof, yRoof, xPanel, yPanel = args[1:]
+    print(getNumberOfPanelsThatFitOnRoof(int(xRoof), int(yRoof),
+                                         int(xPanel), int(yPanel)))
