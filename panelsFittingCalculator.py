@@ -1,7 +1,7 @@
 def getNumberOfPanelsThatFitOnRoof(xRoof, yRoof, xPanel, yPanel):
     return max(
         _getNumberOfPanelsThatFitOnRoof(xRoof, yRoof, xPanel, yPanel),
-        _getNumberOfPanelsThatFitOnRoof(xRoof, yRoof, xPanel, yPanel))
+        _getNumberOfPanelsThatFitOnRoof(xRoof, yRoof, yPanel, xPanel))
 
 def _getNumberOfPanelsThatFitOnRoof(xRoof, yRoof, xPanel, yPanel):
     """
@@ -17,18 +17,18 @@ def _getNumberOfPanelsThatFitOnRoof(xRoof, yRoof, xPanel, yPanel):
     """
     totalPanelsThatFit = _getPanelsThatFitWithoutRotating(
         xRoof, yRoof, xPanel, yPanel)
-    # Check if 90 degrees rotated panel fits in remaining space of row
+    # Check how many 90 degrees rotated panels fit in
+    # remaining space on the right
     remainingHorizontalSpace = xRoof % xPanel
-    if (remainingHorizontalSpace) >= yPanel:
-        panelsThatFitInRemainingColumn = _getPanelsThatFitWithoutRotating(
-            remainingHorizontalSpace, yRoof, yPanel, xPanel)
-        totalPanelsThatFit += panelsThatFitInRemainingColumn
-    # Check if 90 degrees rotated panel fits in remaining space of column
+    panelsThatFitInRemainingColumn = _getPanelsThatFitWithoutRotating(
+        remainingHorizontalSpace, yRoof, yPanel, xPanel)
+    totalPanelsThatFit += panelsThatFitInRemainingColumn
+    # Check how many 90 degrees rotated panels fit in
+    # remaining space above
     remainingVerticalSpace = yRoof % yPanel
-    if (remainingVerticalSpace) >= xPanel:
-        panelsThatFitInRemainingRow = _getPanelsThatFitWithoutRotating(
-            xRoof, remainingVerticalSpace, yPanel, xPanel)
-        totalPanelsThatFit += panelsThatFitInRemainingRow
+    panelsThatFitInRemainingRow = _getPanelsThatFitWithoutRotating(
+        xRoof, remainingVerticalSpace, yPanel, xPanel)
+    totalPanelsThatFit += panelsThatFitInRemainingRow
 
     return totalPanelsThatFit
 
